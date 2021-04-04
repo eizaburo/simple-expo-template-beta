@@ -3,12 +3,14 @@ import { View } from 'react-native';
 import { Header, Text, Image, Button, Input } from 'react-native-elements';
 import { useForm, Controller } from "react-hook-form";
 
+import { API_URL } from '@env';
+
 function Contact() {
 
     const { control, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
-        var base_url = "https://script.google.com/macros/s/AKfycbytXB0FlXLKnEq49qVSmfMl9xfZ7gZpkZkn3J8gmJ5LriLjyLA77NNIm47e5y7qU4g3yA/exec";
-        // var base_url = API_URL;
+        // var base_url = "https://script.google.com/macros/s/{deploy_id}/exec";
+        var base_url = API_URL;
 
         fetch(base_url, {
             method: "POST",
@@ -51,7 +53,7 @@ function Contact() {
                             onChangeText={value => onChange(value)}
                             value={value}
                             errorMessage={errors.email && "Emailは必須です。"}
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                         />
                     )}
                     name="email"
@@ -72,7 +74,7 @@ function Contact() {
                             onChangeText={value => onChange(value)}
                             value={value}
                             errorMessage={errors.email && "お問合せ内容は必須です。"}
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                         />
                     )}
                     name="content"
